@@ -2,7 +2,7 @@ import org.apache.log4j.Logger;
 
 public class ThreadClass extends Thread {
     private static final Logger logger = Logger.getLogger(RunnableClass.class);
-    private final short COUNT_LENGTH = 100;
+    private static final int COUNT_LENGTH = 100;
     private final Counter counter;
 
     public ThreadClass(Counter counter) {
