@@ -4,6 +4,6 @@ public class Main {
         RunnableClass runnableClass = new RunnableClass(counter);
         ThreadClass threadClass = new ThreadClass(counter);
         new Thread(runnableClass).start();
-        threadClass.run();
+        threadClass.start();
     }
 }
