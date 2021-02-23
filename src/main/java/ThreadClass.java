@@ -2,7 +2,7 @@ import org.apache.log4j.Logger;
 
 public class ThreadClass extends Thread {
     private static final Logger logger = Logger.getLogger(RunnableClass.class);
-    private static final int COUNT_LENGTH = 100;
+    private static final int COUNT_VALUE = 100;
     private final Counter counter;
 
     public ThreadClass(Counter counter) {
@@ -11,10 +11,14 @@ public class ThreadClass extends Thread {
 
     @Override
     public void run() {
-        logger.info("Tread " + Thread.currentThread().getName() + " was started ");
-        for (int i = 0; i <= COUNT_LENGTH; i++) {
-            logger.info(Thread.currentThread().getName() + " | " + counter.getCount());
+        logger.info("Thread " + Thread.currentThread().getName() + " was started ");
+
+        while (counter.getCount() <= COUNT_VALUE) {
+            int value = counter.getCount();
+
+            logger.info(Thread.currentThread().getName() + " | " + value);
+            counter.increment();
         }
-        logger.info(Thread.currentThread().getName() + " was finished");
+        logger.info("Thread " + Thread.currentThread().getName() + " was finished");
     }
 }
