@@ -22,5 +22,3 @@ class MyCallableForkJoinTaskTest {
         assertEquals(value, integer);
     }
 }
-
-
