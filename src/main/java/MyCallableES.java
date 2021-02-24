@@ -6,7 +6,7 @@ import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 import org.apache.commons.collections4.ListUtils;
 
-public class MyCallableES implements Callable<Integer> {
+public class MyCallableES {
     private static final int THRESHOLD = 20;
     private List<Integer> list;
 
@@ -14,7 +14,6 @@ public class MyCallableES implements Callable<Integer> {
         this.list = list;
     }
 
-    @Override
     public Integer call() {
         List<List<Integer>> lists = ListUtils.partition(list,list.size() / THRESHOLD);
         ExecutorService executorService = Executors.newFixedThreadPool(THRESHOLD);
