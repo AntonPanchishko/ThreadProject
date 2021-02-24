@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-class Util {
+public class ListSupplier {
     private final static int LIST_RANGE = 1000000;
     private final static int VALUE_RANGE = 10;
 

@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.concurrent.ForkJoinTask;
 import java.util.concurrent.RecursiveTask;
 
-public class MyCallableForkJoinTask extends RecursiveTask<Integer> {
+public class SumCalculatorForkJoinTask extends RecursiveTask<Integer> {
     private static final int THRESHOLD = 20;
     private List<Integer> list;
 
-    public MyCallableForkJoinTask(List<Integer> list) {
+    public SumCalculatorForkJoinTask(List<Integer> list) {
         this.list = list;
     }
 
@@ -23,11 +23,11 @@ public class MyCallableForkJoinTask extends RecursiveTask<Integer> {
         return processing(list);
     }
 
-    private Collection<MyCallableForkJoinTask> createSubtasks() {
-        List<MyCallableForkJoinTask> dividedTasks = new ArrayList<>();
-        dividedTasks.add(new MyCallableForkJoinTask(list
+    private Collection<SumCalculatorForkJoinTask> createSubtasks() {
+        List<SumCalculatorForkJoinTask> dividedTasks = new ArrayList<>();
+        dividedTasks.add(new SumCalculatorForkJoinTask(list
                 .subList(0, list.size() / 2)));
-        dividedTasks.add(new MyCallableForkJoinTask(list
+        dividedTasks.add(new SumCalculatorForkJoinTask(list
                 .subList(list.size() / 2, list.size())));
         return dividedTasks;
     }

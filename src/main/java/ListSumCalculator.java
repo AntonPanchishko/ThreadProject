@@ -1,10 +1,10 @@
 import java.util.List;
 import java.util.concurrent.Callable;
 
-public class MyCallable implements Callable<Integer> {
+public class ListSumCalculator implements Callable<Integer> {
     private List<Integer> list;
 
-    public MyCallable(List<Integer> list) {
+    public ListSumCalculator(List<Integer> list) {
         this.list = list;
     }
 
