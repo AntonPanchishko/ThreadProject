@@ -1,10 +1,10 @@
 import java.util.List;
 import java.util.concurrent.Callable;
 
-public class CustomCallableThread implements Callable<Integer> {
+public class MyCallable implements Callable<Integer> {
     private List<Integer> list;
 
-    public CustomCallableThread(List<Integer> list) {
+    public MyCallable(List<Integer> list) {
         this.list = list;
     }
 

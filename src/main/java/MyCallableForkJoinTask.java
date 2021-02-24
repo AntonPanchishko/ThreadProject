@@ -25,8 +25,10 @@ public class MyCallableForkJoinTask extends RecursiveTask<Integer> {
 
     private Collection<MyCallableForkJoinTask> createSubtasks() {
         List<MyCallableForkJoinTask> dividedTasks = new ArrayList<>();
-        dividedTasks.add(new MyCallableForkJoinTask(list.subList(0, list.size() / 2)));
-        dividedTasks.add(new MyCallableForkJoinTask(list.subList(list.size() / 2, list.size())));
+        dividedTasks.add(new MyCallableForkJoinTask(list
+                .subList(0, list.size() / 2)));
+        dividedTasks.add(new MyCallableForkJoinTask(list
+                .subList(list.size() / 2, list.size())));
         return dividedTasks;
     }
 

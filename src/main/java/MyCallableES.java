@@ -2,6 +2,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 import org.apache.commons.collections4.ListUtils;
 
@@ -13,12 +14,12 @@ public class MyCallableES {
         this.list = list;
     }
 
-    public Integer call() {
-        List<List<Integer>> lists = ListUtils.partition(list,list.size() / THRESHOLD);
+    public Integer calculateSum() {
+        List<List<Integer>> lists = ListUtils.partition(list, list.size() / THRESHOLD);
         ExecutorService executorService = Executors.newFixedThreadPool(THRESHOLD);
 
-        List<CustomCallableThread> callableList = lists.stream()
-                .map(CustomCallableThread::new)
+        List<MyCallable> callableList = lists.stream()
+                .map(MyCallable::new)
                 .collect(Collectors.toList());
         try {
             executorService.invokeAll(callableList);
@@ -31,14 +32,15 @@ public class MyCallableES {
     }
 
     private Integer getSum(ExecutorService executorService,
-                           List<CustomCallableThread> callableList) {
+                           List<MyCallable> callableList) {
         int result = 0;
-        for (int i = 0; i < callableList.size(); i++) {
-            try {
-                result = result + executorService.submit(callableList.get(i)).get();
-            } catch (InterruptedException | ExecutionException e) {
-                throw new RuntimeException("Can't submit this thread " + e);
+        try {
+            List<Future<Integer>> futures = executorService.invokeAll(callableList);
+            for (int i = 0; i < callableList.size(); i++) {
+                result = result + futures.get(i).get();
             }
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException("Can't submit this thread " + e);
         }
         return result;
     }
